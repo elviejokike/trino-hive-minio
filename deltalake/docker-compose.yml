@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+
+  delta-minio:
+    hostname: delta-minio
+    networks:
+      - delta-network
+    image: quay.io/minio/minio
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    ports:
+      - "19000:9000"
+      - "19001:9001"
+    command: >
+      server /data --console-address ':9001'
+    volumes:
+      - delta-minio-data:/data
+
+  hive-postgres:
+    hostname: hive-postgres
+    networks:
+      - delta-network
+    image: postgres
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_DB=hive_metastore
+      - POSTGRES_USER=hive
+      - POSTGRES_PASSWORD=hivepass123
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "15432:5432"  # PostgreSQL default port
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data 
+
+  hive-metastore:
+      image: apache/hive:4.0.0-alpha-2
+      networks:
+        - delta-network
+      environment:
+        - HADOOP_OPTIONAL_TOOLS=hadoop-aws
+        - SERVICE_NAME=metastore
+        - DB_DRIVER=postgres
+        - SERVICE_OPTS=-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://kikes-air.home:15432/hive_metastore -Djavax.jdo.option.ConnectionUserName=hive -Djavax.jdo.option.ConnectionPassword=hivepass123
+      ports:
+        - "9083:9083"
+      volumes:
+        # - ${PWD}/hive/metastore-site.xml:/opt/apache-hive-metastore-3.1.3-bin/conf/metastore-site.xml
+        - ${PWD}/hive/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      depends_on:
+        - hive-postgres
+        - delta-minio
+volumes:
+  delta-minio-data:
+    driver: local 
+    driver_opts:
+      type: none
+      device: ./minio/data
+      o: bind
+  postgres-data:
+  warehouse:
+
+networks:
+  delta-network:
