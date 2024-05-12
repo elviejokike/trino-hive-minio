@@ -62,6 +62,11 @@ volumes:
   delta-minio-data:
   postgres-data:
   trino-config:
+    driver: local 
+    driver_opts:
+      type: none
+      device: ./trino/etc
+      o: bind
 
 networks:
   delta-network:
