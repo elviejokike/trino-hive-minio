@@ -14,15 +14,8 @@
   limitations under the License. See accompanying LICENSE file.
 -->
 
-<!-- Put site-specific property overrides in this file. -->
-
 <configuration>
 
-<!-- <property>
-    <name>fs.default.name</name>
-    <value>hdfs://quickstart.cloudera:9000</value>
-</property> -->
-<!-- Minio properties -->
 <property>
     <name>fs.s3a.path.style.access</name>
     <value>true</value>
@@ -38,15 +31,6 @@
     <value>http://kikes-air.home:19000</value>
 </property>
 
-<!-- <property>
-    <name>fs.s3a.awsAccessKeyId</name>
-    <value>n1Z8USynE2uOBJmc</value>
-</property>
-
-<property>
-    <name>fs.s3a.awsSecretAccessKey</name>
-    <value>RjK4uL35tFNTROo2WsPVZhA77AJ5qJEx</value>
-</property> -->
 
 <property>
     <name>fs.s3a.access.key</name>
