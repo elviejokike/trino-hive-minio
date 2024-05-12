@@ -32,7 +32,7 @@ services:
     ports:
       - "15432:5432"  # PostgreSQL default port
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data 
+      - postgres-data:/var/lib/postgresql/data 
 
   hive-metastore:
       image: apache/hive:4.0.0-alpha-2
@@ -51,15 +51,17 @@ services:
       depends_on:
         - hive-postgres
         - delta-minio
+  trino:
+    image: 'trinodb/trino'
+    ports:
+      - '18080:18080'
+    volumes:
+      - trino-config:/etc/trino
+
 volumes:
   delta-minio-data:
-    driver: local 
-    driver_opts:
-      type: none
-      device: ./minio/data
-      o: bind
   postgres-data:
-  warehouse:
+  trino-config:
 
 networks:
   delta-network:
