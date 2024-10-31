@@ -57,10 +57,29 @@ services:
       - '18080:18080'
     volumes:
       - trino-config:/etc/trino
+    environment:
+      - MINIO_ACCESS_KEY=As29ysaTBtfY34zTfhGv
+      - MINIO_SECRET_KEY=6IBBaBF8b89ZpjABBih7VO587nLP0543jGmSc3z3
+
+  mypostgres:
+    hostname: mypostgres
+    networks:
+      - delta-network
+    image: postgres
+    environment:
+      - POSTGRES_DB=mydb
+      - POSTGRES_USER=deltalake
+      - POSTGRES_PASSWORD=deltalake
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "25432:5432"  # PostgreSQL default port
+    volumes:
+      - mypostgres-data:/var/lib/postgresql/data 
 
 volumes:
   delta-minio-data:
   postgres-data:
+  mypostgres-data:
   trino-config:
     driver: local 
     driver_opts:

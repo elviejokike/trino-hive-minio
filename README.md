@@ -39,13 +39,13 @@ This can be used to connect to trino once this is up and running using:
 Create an schema
 
 ```
-CREATE SCHEMA IF NOT EXISTS delta.play WITH (location = 's3a://play/');
+CREATE SCHEMA IF NOT EXISTS mydelta.play WITH (location = 's3a://play/');
 ```
 
 Create a table
 
 ```
-CREATE TABLE IF NOT EXISTS delta.play.mytable
+CREATE TABLE IF NOT EXISTS mydelta.play.mytable
 (
     width  DOUBLE,
     length DOUBLE,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS delta.play.mytable
 Create a table in a specific location
 
 ```
-create table delta.play.table_with_location (
+create table mydelta.play.table_with_location (
         col1 varchar,
         col2 varchar,
         col3 varchar
@@ -69,7 +69,7 @@ create table delta.play.table_with_location (
 Create a table in a specific location and partition
 
 ```
-create table delta.play.table_with_partition (
+create table mydelta.play.table_with_partition (
         col1 varchar,
         col2 varchar,
         col3 varchar,

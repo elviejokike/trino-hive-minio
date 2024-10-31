@@ -34,12 +34,12 @@
 
 <property>
     <name>fs.s3a.access.key</name>
-    <value>F98er8TylG5T0t4zgHqC</value>
+    <value>As29ysaTBtfY34zTfhGv</value>
 </property>
 
 <property>
     <name>fs.s3a.secret.key</name>
-    <value>okbubO80nAxB3ZbWvMvjbSOj4V4iw0WczUmgZbjQ</value>
+    <value>6IBBaBF8b89ZpjABBih7VO587nLP0543jGmSc3z3</value>
 </property>
 
 <property>
