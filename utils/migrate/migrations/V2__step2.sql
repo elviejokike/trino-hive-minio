@@ -1,0 +1,1 @@
+ALTER TABLE icebergnessie.test.mig_1 ADD COLUMN value_y DOUBLE

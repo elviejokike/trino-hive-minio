@@ -1,2 +1,4 @@
 deltalake/minio/data
 deltalake/postgres-data/pgdata
+
+__pycache__/

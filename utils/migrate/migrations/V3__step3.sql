@@ -1,0 +1,1 @@
+ALTER TABLE icebergnessie.test.mig_1 RENAME COLUMN value TO value_x
